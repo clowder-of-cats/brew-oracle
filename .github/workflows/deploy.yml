@@ -27,8 +27,22 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug - List Build Output
+        run: |
+          echo "Contents of current directory:"
+          ls -la
+          echo "Contents of dist directory:"
+          ls -la dist || echo "dist directory not found"
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          force_orphan: true
+          commit_message: "Deploy: ${{ github.sha }}"
+
+      - name: Debug - Post Deploy
+        run: |
+          echo "Deployment complete"
+          git branch -a
