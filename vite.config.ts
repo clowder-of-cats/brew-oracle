@@ -4,4 +4,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/brew-oracle/',
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+    assetsDir: 'assets'
+  }
 })
